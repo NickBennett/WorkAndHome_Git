@@ -6,8 +6,6 @@ library(trip)
 library(png)
 library(useful)
 library(ggmap)
-#JEDS API KEY - May cost a bit of money but  < 1 cent per query.
-register_google(key = "AIzaSyDvoeGCyrwEQME85zAFmlW97fcZpd97c1k")
 
 # d1 - location data
 # d2 - Staypoint data

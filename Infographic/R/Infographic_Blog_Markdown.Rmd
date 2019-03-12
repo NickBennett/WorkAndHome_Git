@@ -1,0 +1,52 @@
+---
+title: "WorkAndHome Blog"
+author: "Jed Long, Nick Bennett"
+date: "March 12, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Creating an InfoGraphic in R
+
+## Background on the WorkAndHome project
+
+As part of the [WorkAndHome project](http://workandhome.ac.uk/) we are conducting a large GPS-based mobile app survey. Within this survey we are monitoring the movement of over 800 participants using GPS tracking, and systematically sampling their experiences throuhgout the day using a mobile-survey platform. The mobile application we are using was developed by [Wubbleyou](https://www.wubbleyou.co.uk/) and the participant recruitment was conducted by [BMG Research](https://www.bmgresearch.co.uk/).
+
+## Need for an Infographic
+
+As part of our mobile survey we wished to report back to our participants --  that is to share the data we have collected about them with them after they have finished their participation.
+
+To do so we wanted to create an anonymous and automated piece of R analysis that produced a production quality graphic that summarizes their data. To our surprise their were few examples of this type of output on R, despite the fact that combining multiple plots, graphics, and text on a single figure is well documented in the R infrastructure. We did however find one nice [example](https://www.r-bloggers.com/r-how-to-layout-and-design-an-infographic/) and we chose to build on the ideas that were used in that blogpost.
+
+
+## Infographic Components
+
+We wanted the infographic to show:
+
+1. Summary statistics about the particpant and their data;
+2. Maps of participant GPS tracking data, overlaid on a basemap/satellite imagery;
+3. Frequency histograms of responses from three different survey qeustions about feelings;
+4. Tables of the top responses from three different survey questions activities; 
+5. Logos and information about the study.
+
+
+# How we built it
+
+An example of the data we used for creating the infographic is stored in the [WorkAndHome Github Repo](https://github.com/jedalong/WorkAndHome_Git). We can first load the data from GitHub using the *httr* package to access the web url.
+
+```{r}
+library(httr)
+locs <- read.csv(text=GET("https://raw.githubusercontent.com/jedalong/WorkAndHome_Git/data/locations.csv"), header=T)
+```
+
+## Building Individual Components
+
+We first started by generating the summary statistics we needed. For example we calculated the
+
+
+
+Following this [example](https://www.r-bloggers.com/r-how-to-layout-and-design-an-infographic/) we chose to build the infographic using the *ggplot* library of associated functions and *lattice* package for 
+

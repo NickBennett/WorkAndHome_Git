@@ -19,7 +19,7 @@ create_infographic <-  function(d1,d2,ID,outdir){
   col4 <- "#CA8B01"
   col5 <- "#A9A8A7"
   # Configure Theme # CANT GET FONTS TO WORK NICK
-  kobe_theme <- function() {
+  my_theme <- function() {
     theme(
       plot.background = element_rect(fill = col1, colour = col1),
       panel.background = element_rect(fill = col1),
@@ -85,7 +85,7 @@ create_infographic <-  function(d1,d2,ID,outdir){
   p2 <- ggplot(data = dat, aes(x = x, y = y)) + geom_bar(stat = "identity", fill = col3) +
     ylab("Frequency") + xlab("Feeling Score") + facet_grid(. ~ grp) +
     ggtitle("How did you feel?")
-  #p2 + kobe_theme()
+  #p2 + my_theme()
   
   #===============================
   #P3 Question "TOP" Summaries
@@ -271,7 +271,7 @@ create_infographic <-  function(d1,d2,ID,outdir){
   print(m1b,vp=vplayout(2,2))
   print(m1c,vp=vplayout(2,3))
   print(m1a,vp=vplayout(2,1)) #plot with legend last so legend shows
-  print(p2+kobe_theme(),vp=vplayout(3,1:3))
+  print(p2+my_theme(),vp=vplayout(3,1:3))
   
   
   grid.draw(g3a)

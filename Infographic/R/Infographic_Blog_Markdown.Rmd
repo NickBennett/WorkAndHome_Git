@@ -9,22 +9,27 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Creating an InfoGraphic in R
+# Creating the Participant Summaries in R
 
 ## Background on the WorkAndHome project
 
-As part of the [WorkAndHome project](http://workandhome.ac.uk/) we are conducting a large GPS-based mobile app survey. Within this survey we are monitoring the movement of over 800 participants using GPS tracking, and systematically sampling their experiences throuhgout the day using a mobile-survey platform. The mobile application we are using was developed by [Wubbleyou](https://www.wubbleyou.co.uk/) and the participant recruitment was conducted by [BMG Research](https://www.bmgresearch.co.uk/).
+As part of the [WorkAndHome project](http://workandhome.ac.uk/) we are conducting a large GPS-based mobile app survey. Within this survey we are monitoring the movement of over 800 participants using GPS tracking, and systematically sampling their experiences throughout the day using a mobile-survey platform. The mobile application we are using was developed by [Wubbleyou](https://www.wubbleyou.co.uk/) and the participant recruitment was conducted by [BMG Research](https://www.bmgresearch.co.uk/).
 
 ## Need for an Infographic
 
-As part of our mobile survey we wished to report back to our participants --  that is to share the data we have collected about them with them after they have finished their participation.
+As part of our mobile survey we want to report back to our participants --  that is to share the data we have collected about them with them, after they have finished their participation. We needed to identify people from our much larger dataset using their Participant ID, and then produce a summary of their particpation via the data.
 
 To do so we wanted to create an anonymous and automated piece of R analysis that produced a production quality graphic that summarizes their data. To our surprise their were few examples of this type of output on R, despite the fact that combining multiple plots, graphics, and text on a single figure is well documented in the R infrastructure. We did however find one nice [example](https://www.r-bloggers.com/r-how-to-layout-and-design-an-infographic/) and we chose to build on the ideas that were used in that blogpost.
 
 
 ## Infographic Components
 
-We wanted the infographic to show:
+Our survey consisted of two seperate but related datasets:
+
+I. GPS tracking data
+II. Survey question responses
+
+Therefore, we wanted the infographic to show:
 
 1. Summary statistics about the particpant and their data;
 2. Maps of participant GPS tracking data, overlaid on a basemap/satellite imagery;
@@ -33,20 +38,40 @@ We wanted the infographic to show:
 5. Logos and information about the study.
 
 
-# How we built it
+## Building individual Componenets 
 
-An example of the data we used for creating the infographic is stored in the [WorkAndHome Github Repo](https://github.com/jedalong/WorkAndHome_Git). We can first load the data from GitHub using the *httr* package to access the web url.
+First we started by building three separate maps of the users GPS tracking data:
 
-```{r}
-library(httr)
-locs <- read.csv(text=GET("https://raw.githubusercontent.com/jedalong/WorkAndHome_Git/data/locations.csv"), header=T)
-```
+- one showing their entire track;
+- one centered on their home;
+- one cenetered on their work or other top location.
 
-## Building Individual Components
+We used the [ggmap](https://cran.r-project.org/web/packages/ggmap/) package to create the maps and used the Google satellite imagery as the underlying basemap (requiring us to have an [Google Static Maps API key](https://developers.google.com/maps/documentation/maps-static/intro )).
 
-We first started by generating the summary statistics we needed. For example we calculated the
+We then produced three histograms (in [ggplot2](https://cran.r-project.org/web/packages/ggplot2)) based on the participant survey responses about how they feel at different times throughout the survey.
 
+Finally, we generated tabular data and created table objects using the *tableGrob* function in the [gridExtra](https://cran.r-project.org/web/packages/gridExtra) package. 
 
+The infographic layout, including text additions, was fully implemented using the [grid-graphics](https://stat.ethz.ch/R-manual/R-devel/library/grid/html/grid-package.html) package. Specifically, we used this package for everything from:
 
-Following this [example](https://www.r-bloggers.com/r-how-to-layout-and-design-an-infographic/) we chose to build the infographic using the *ggplot* library of associated functions and *lattice* package for 
+- creating background colours
+- all text
+- placing figures
+- reading and plotting logos
+
+An example of the data we collected is provided on our project GitHub page (this is Jed's data from when we were testing the App). There are two files, one for the location data and one for the survey data. 
+
+We created a *create_infographic* function, which we used to automate the process of creating summary reports for our 800+ participants. The R code for the *create_infographic* function can be found [here](https://github.com/jedalong/WorkAndHome_Git/blob/master/Infographic/R/create_infographic.R) on our github page. An example of our finished product is below!
+
+![](D:/WorkAndHome/WorkAndHome_Git/Infographic/Infographic_test.png)
+    
+
+Contact us via email or tweet us:
+
+[\@WORK_AND_HOME](https://twitter.com/WORK_AND_HOME)
+
+[Jed Long](jed.long@uwo.ca)
+
+[Nick Bennett](N.Bennett@soton.ac.uk)
+
 

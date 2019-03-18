@@ -252,6 +252,9 @@ create_infographic <-  function(d1,d2,ID,outdir){
   
   #Get Second Top Staypoint ID - often work
   txtAct <- stay.tab2$Location[2]
+  if (is.na(stay.tab2$Location[2])) {
+    txtAct <- stay.tab2$Location[1]
+  }
   stay.tab2
   txtAct
   iA <- which(d2_s$Staypoint.Name == txtAct | d2_s$Staypoint.Hardcoded.Location == txtAct)

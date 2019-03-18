@@ -11,7 +11,7 @@ library(useful)
 library(ggmap)
 
 ### Load datasets
-setwd("//filestore.soton.ac.uk/users/ncb1e17/mydocuments/Git/WorkAndHome_Git/Infographic/")
+setwd("Infographic/")
 d1 <- read.csv("data/locations.csv") # Location data
 d2 <- read.csv("data/staypoints.csv") # Staypoint data
 outdir <- ("")
@@ -20,8 +20,6 @@ outdir <- ("")
 ID <- 4
 
 ### PDF Script ###
-# key <- read.delim("key.txt")
-# key <- toString(key)
 key <- "Get from Google Maps API"
 ggmap::register_google(key = key)
 

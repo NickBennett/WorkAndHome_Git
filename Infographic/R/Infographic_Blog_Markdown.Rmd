@@ -17,34 +17,34 @@ As part of the [WorkAndHome project](http://workandhome.ac.uk/) we are conductin
 
 ## Need for an Infographic
 
-As part of our mobile survey we want to report back to our participants --  that is to share the data we have collected about them with them, after they have finished their participation. We needed to identify people from our much larger dataset using their Participant ID, and then produce a summary of their particpation via the data.
+As part of our mobile survey we want to report back to our participants --  that is to share the data we have collected about them with them, after they have finished their participation. We needed to identify people from our much larger dataset using their Participant ID, and then produce a summary of their participation via the data.
 
-To do so we wanted to create an anonymous and automated piece of R analysis that produced a production quality graphic that summarizes their data. To our surprise their were few examples of this type of output on R, despite the fact that combining multiple plots, graphics, and text on a single figure is well documented in the R infrastructure. We did however find one nice [example](https://www.r-bloggers.com/r-how-to-layout-and-design-an-infographic/) and we chose to build on the ideas that were used in that blogpost.
+To do so we wanted to create an anonymous and automated piece of R analysis that produced a production quality graphic that summarizes their data. To our surprise there were few examples of this type of output on R, despite the fact that combining multiple plots, graphics, and text on a single figure is well documented in the R infrastructure. We did however find one nice [example](https://www.r-bloggers.com/r-how-to-layout-and-design-an-infographic/) and we chose to build on the ideas that were used in that blogpost.
 
 
 ## Infographic Components
 
-Our survey consisted of two seperate but related datasets:
+Our survey consisted of two separate but related datasets:
 
 I. GPS tracking data
 II. Survey question responses
 
 Therefore, we wanted the infographic to show:
 
-1. Summary statistics about the particpant and their data;
+1. Summary statistics about the participant and their data;
 2. Maps of participant GPS tracking data, overlaid on a basemap/satellite imagery;
-3. Frequency histograms of responses from three different survey qeustions about feelings;
+3. Frequency histograms of responses from three different survey questions about feelings;
 4. Tables of the top responses from three different survey questions activities; 
 5. Logos and information about the study.
 
 
-## Building individual Componenets 
+## Building individual Components 
 
 First we started by building three separate maps of the users GPS tracking data:
 
 - one showing their entire track;
-- one centered on their home;
-- one cenetered on their work or other top location.
+- one centered on their most popular check-in location, often home;
+- one centered on their second most popular check-in location, often work.
 
 We used the [ggmap](https://cran.r-project.org/web/packages/ggmap/) package to create the maps and used the Google satellite imagery as the underlying basemap (requiring us to have an [Google Static Maps API key](https://developers.google.com/maps/documentation/maps-static/intro )).
 
